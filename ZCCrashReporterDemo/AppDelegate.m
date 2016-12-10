@@ -8,39 +8,26 @@
 
 #import "AppDelegate.h"
 #import "ZCCrashReporter.h"
-#import <CrashReporter/CrashReporter.h>
 
 @interface AppDelegate ()
-
 @end
 
 @implementation AppDelegate
 
 
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    //[ZCCrashReporter setDefaultHandler];
     
-    BOOL bCrash = YES;
+    //[self testTryCatch];
+
+    [[ZCCrashReporter sharedInstance] setupAppExceptionHandler];
     
-    PLCrashReporter *crashReporter = [PLCrashReporter sharedReporter];
-    NSError *error;
-    // Check if we previously crashed
-    if ([crashReporter hasPendingCrashReport]) {
-        [self handleCrashReport];
-        bCrash = NO;
-    }
-    // Enable the Crash Reporter
-    if (![crashReporter enableCrashReporterAndReturnError: &error]) {
-        NSLog(@"Warning: Could not enable crash reporter: %@", error);
-    }
+    // PLCrashReporter
+    //[[ZCCrashReporter sharedInstance] setupPLCrashReporter];
     
+    //[[ZCCrashReporter sharedInstance] setupSignalHandler];
     
-    // Crash
-    if (bCrash) {
-        NSArray *array = [NSArray arrayWithObject:@"there is only one objective in this arary,call index one, app will crash and throw an exception!"];
-        NSLog(@"%@", [array objectAtIndex:1]);
-    }
     return YES;
 }
 
@@ -71,59 +58,44 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
-#pragma mark - PLCrashReporter
+#pragma mark - private
 
-- (void) handleCrashReport {
-    PLCrashReporter *crashReporter = [PLCrashReporter sharedReporter];
-    NSData *crashData;
-    NSError *error;
-    
-    // Try loading the crash report
-    crashData = [crashReporter loadPendingCrashReportDataAndReturnError: &error];
-    if (crashData) {
-        // We could send the report from here, but we'll just print out
-        // some debugging info instead
-        PLCrashReport *report = [[PLCrashReport alloc] initWithData: crashData error: &error];
-        NSString *crashContents;
-        if (report) {
-            crashContents = [NSString stringWithFormat:@"Time: %@\n", report.systemInfo.timestamp];
-            crashContents = [crashContents stringByAppendingFormat:@"signal %@ (code %@, address=0x%" PRIx64 ")\n", report.signalInfo.name,report.signalInfo.code, report.signalInfo.address];
-            crashContents = [crashContents stringByAppendingFormat:@"exception name: %@\nexception reason: %@",report.exceptionInfo.exceptionName, report.exceptionInfo.exceptionReason];
-        }
-        else {
-            crashContents = [NSString stringWithFormat:@"Could not parse crash report"];
-        }
-        
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Crash"
-                                                                                 message:crashContents
-                                                                          preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消"
-                                                               style:UIAlertActionStyleCancel
-                                                             handler:^(UIAlertAction * _Nonnull action) {
-                                                             }];
-        [alertController addAction:cancelAction];
-        [self presentAlertViewController:alertController];
+- (void)testTryCatch {
+    @try {
+        NSLog(@"1");
+        [self tryTwo];
     }
-    else {
-        NSLog(@"Could not load crash report: %@", error);
+    @catch (NSException *exception) {
+        NSLog(@"2");
+        //NSLog(@"%s\n%@", __FUNCTION__, exception);
     }
-    
-    // Purge the report
-    [crashReporter purgePendingCrashReport];
-    return;
+    @finally {
+        //我一定会执行
+        NSLog(@"3");
+    }
+    // 这里一定会执行
+    NSLog(@"4");
 }
 
-- (void)presentAlertViewController:(UIAlertController *)alertController {
-    if (![self hasStoryboardInfo]) {
-        self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-        self.window.rootViewController = [[UIViewController alloc] init];
+- (void)tryTwo {
+    @try {
+        NSLog(@"5");
+        NSString *str = @"abc";
+        [str substringFromIndex:111]; // 程序到这里会崩
     }
-    [self.window makeKeyAndVisible];
-    [self.window.rootViewController presentViewController:alertController animated:YES completion:nil];
-}
-
-- (BOOL)hasStoryboardInfo {
-    return [[NSBundle mainBundle] objectForInfoDictionaryKey:@"UIMainStoryboardFile"] != nil ? YES:NO;
+    @catch (NSException *exception) {
+        NSLog(@"6");
+        @throw exception; // 抛出异常，即由上一级处理
+        NSLog(@"7");
+        //NSLog(@"%s\n%@", __FUNCTION__, exception);
+    }
+    @finally {
+        // 我一定会执行
+        NSLog(@"8");
+    }
+    
+    // 如果抛出异常，那么这段代码则不会执行
+    NSLog(@"9");
 }
 
 @end

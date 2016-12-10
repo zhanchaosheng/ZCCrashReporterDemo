@@ -6,11 +6,16 @@
 //  Copyright © 2016年 zcs. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 @interface ZCCrashReporter : NSObject
 
-+ (void)setDefaultHandler;
-+ (NSUncaughtExceptionHandler*)getHandler;
++ (instancetype)sharedInstance;
 
+- (void)setupAppExceptionHandler;
+- (NSUncaughtExceptionHandler*)getAppExceptionHandler;
+
+- (void)setupPLCrashReporter;
+
+- (void)setupSignalHandler;
 @end

@@ -15,6 +15,7 @@
 		11BA98BD1DFA8D8F0060649F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 11BA98BB1DFA8D8F0060649F /* LaunchScreen.storyboard */; };
 		11BA98C61DFA8EB90060649F /* ZCCrashReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 11BA98C51DFA8EB90060649F /* ZCCrashReporter.m */; };
 		11BA98C91DFA9B6D0060649F /* CrashReporter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11BA98C81DFA9B6D0060649F /* CrashReporter.framework */; };
+		1A5648BD1DFC0DDD005DA993 /* ZCSignalHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A5648BC1DFC0DDD005DA993 /* ZCSignalHandler.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +32,8 @@
 		11BA98C41DFA8EB90060649F /* ZCCrashReporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZCCrashReporter.h; sourceTree = "<group>"; };
 		11BA98C51DFA8EB90060649F /* ZCCrashReporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZCCrashReporter.m; sourceTree = "<group>"; };
 		11BA98C81DFA9B6D0060649F /* CrashReporter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CrashReporter.framework; sourceTree = "<group>"; };
+		1A5648BB1DFC0DDD005DA993 /* ZCSignalHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZCSignalHandler.h; sourceTree = "<group>"; };
+		1A5648BC1DFC0DDD005DA993 /* ZCSignalHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZCSignalHandler.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +75,8 @@
 				11BA98AD1DFA8D8F0060649F /* Supporting Files */,
 				11BA98C41DFA8EB90060649F /* ZCCrashReporter.h */,
 				11BA98C51DFA8EB90060649F /* ZCCrashReporter.m */,
+				1A5648BB1DFC0DDD005DA993 /* ZCSignalHandler.h */,
+				1A5648BC1DFC0DDD005DA993 /* ZCSignalHandler.m */,
 			);
 			path = ZCCrashReporterDemo;
 			sourceTree = "<group>";
@@ -169,6 +174,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				11BA98B51DFA8D8F0060649F /* ViewController.m in Sources */,
+				1A5648BD1DFC0DDD005DA993 /* ZCSignalHandler.m in Sources */,
 				11BA98C61DFA8EB90060649F /* ZCCrashReporter.m in Sources */,
 				11BA98B21DFA8D8F0060649F /* AppDelegate.m in Sources */,
 				11BA98AF1DFA8D8F0060649F /* main.m in Sources */,
@@ -289,6 +295,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 8LM9AMKE5Y;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -296,9 +304,11 @@
 					"$(PROJECT_DIR)/ZCCrashReporterDemo",
 				);
 				INFOPLIST_FILE = ZCCrashReporterDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.cusen.ZCCrashReporterDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -306,6 +316,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 8LM9AMKE5Y;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -313,9 +325,11 @@
 					"$(PROJECT_DIR)/ZCCrashReporterDemo",
 				);
 				INFOPLIST_FILE = ZCCrashReporterDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.cusen.ZCCrashReporterDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
