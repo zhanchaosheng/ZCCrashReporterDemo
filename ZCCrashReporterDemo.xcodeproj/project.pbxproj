@@ -15,6 +15,7 @@
 		11BA98BD1DFA8D8F0060649F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 11BA98BB1DFA8D8F0060649F /* LaunchScreen.storyboard */; };
 		11BA98C61DFA8EB90060649F /* ZCCrashReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 11BA98C51DFA8EB90060649F /* ZCCrashReporter.m */; };
 		11BA98C91DFA9B6D0060649F /* CrashReporter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11BA98C81DFA9B6D0060649F /* CrashReporter.framework */; };
+		1A2BC39D1DFD206E00DB1B5C /* ZCMachExceptionHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A2BC39C1DFD206E00DB1B5C /* ZCMachExceptionHandler.m */; };
 		1A5648BD1DFC0DDD005DA993 /* ZCSignalHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A5648BC1DFC0DDD005DA993 /* ZCSignalHandler.m */; };
 /* End PBXBuildFile section */
 
@@ -32,6 +33,8 @@
 		11BA98C41DFA8EB90060649F /* ZCCrashReporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZCCrashReporter.h; sourceTree = "<group>"; };
 		11BA98C51DFA8EB90060649F /* ZCCrashReporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZCCrashReporter.m; sourceTree = "<group>"; };
 		11BA98C81DFA9B6D0060649F /* CrashReporter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CrashReporter.framework; sourceTree = "<group>"; };
+		1A2BC39B1DFD206E00DB1B5C /* ZCMachExceptionHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZCMachExceptionHandler.h; sourceTree = "<group>"; };
+		1A2BC39C1DFD206E00DB1B5C /* ZCMachExceptionHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZCMachExceptionHandler.m; sourceTree = "<group>"; };
 		1A5648BB1DFC0DDD005DA993 /* ZCSignalHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZCSignalHandler.h; sourceTree = "<group>"; };
 		1A5648BC1DFC0DDD005DA993 /* ZCSignalHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZCSignalHandler.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -77,6 +80,8 @@
 				11BA98C51DFA8EB90060649F /* ZCCrashReporter.m */,
 				1A5648BB1DFC0DDD005DA993 /* ZCSignalHandler.h */,
 				1A5648BC1DFC0DDD005DA993 /* ZCSignalHandler.m */,
+				1A2BC39B1DFD206E00DB1B5C /* ZCMachExceptionHandler.h */,
+				1A2BC39C1DFD206E00DB1B5C /* ZCMachExceptionHandler.m */,
 			);
 			path = ZCCrashReporterDemo;
 			sourceTree = "<group>";
@@ -173,6 +178,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1A2BC39D1DFD206E00DB1B5C /* ZCMachExceptionHandler.m in Sources */,
 				11BA98B51DFA8D8F0060649F /* ViewController.m in Sources */,
 				1A5648BD1DFC0DDD005DA993 /* ZCSignalHandler.m in Sources */,
 				11BA98C61DFA8EB90060649F /* ZCCrashReporter.m in Sources */,

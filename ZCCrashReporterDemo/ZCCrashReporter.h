@@ -12,10 +12,24 @@
 
 + (instancetype)sharedInstance;
 
+/**
+ 设置应用级异常NSException处理入口函数
+ */
 - (void)setupAppExceptionHandler;
 - (NSUncaughtExceptionHandler*)getAppExceptionHandler;
 
-- (void)setupPLCrashReporter;
-
+/**
+ 设置Unix信号处理
+ */
 - (void)setupSignalHandler;
+
+/**
+ 设置Mach异常处理
+ */
+- (void)setupMatchExceptionHandler;
+
+/**
+ 使用开源异常捕获框架PLCrashReporter
+ */
+- (void)setupPLCrashReporter;
 @end

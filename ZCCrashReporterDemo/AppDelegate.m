@@ -21,12 +21,14 @@
     
     //[self testTryCatch];
 
-    [[ZCCrashReporter sharedInstance] setupAppExceptionHandler];
+    //[[ZCCrashReporter sharedInstance] setupAppExceptionHandler];
     
     // PLCrashReporter
     //[[ZCCrashReporter sharedInstance] setupPLCrashReporter];
     
     //[[ZCCrashReporter sharedInstance] setupSignalHandler];
+    
+    [[ZCCrashReporter sharedInstance] setupMatchExceptionHandler];
     
     return YES;
 }

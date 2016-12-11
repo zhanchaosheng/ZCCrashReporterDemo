@@ -26,9 +26,11 @@
 }
 
 - (IBAction)crashBtnClicked:(UIButton *)sender {
-    NSArray *array = [NSArray arrayWithObject:@"there is only one objective in this arary,call index one, app will crash and throw an exception!"];
-    
-    NSLog(@"%@", [array objectAtIndex:1]);
+//    NSArray *array = [NSArray arrayWithObject:@"there is only one objective in this arary,call index one, app will crash and throw an exception!"];
+//    
+//    NSLog(@"%@", [array objectAtIndex:1]);
+    char *nullPtr = NULL;
+    nullPtr[0] = 1;
 }
 
 

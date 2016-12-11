@@ -10,11 +10,11 @@
 #import <libkern/OSAtomic.h>
 #import <execinfo.h>
 
-const NSInteger UncaughtExceptionHandlerSkipAddressCount = 4; // 调用堆栈中需要跳过的帧数
-const NSInteger UncaughtExceptionHandlerReportAddressCount = 5; // 获取调用堆栈中的帧数
+const NSInteger UncaughtExceptionHandlerSkipAddressCount = 0; // 调用堆栈中需要跳过的帧数
+const NSInteger UncaughtExceptionHandlerReportAddressCount = 8; // 获取调用堆栈中的帧数
 
 volatile int32_t UncaughtExceptionCount = 0; //当前处理的异常个数
-volatile int32_t UncaughtExceptionMaximum = 10; //最大能够处理的异常个数
+volatile int32_t UncaughtExceptionMaximum = 5; //最大能够处理的异常个数
 
 
 //捕获信号后的回调函数
@@ -105,8 +105,14 @@ void HandleSignalException(int signal);
 {
     CFRunLoopRef runLoop = CFRunLoopGetCurrent();
     CFArrayRef allModes = CFRunLoopCopyAllModes(runLoop);
+    
+    NSString *message = [NSString stringWithFormat:@"%@ %@",exception.name, exception.reason];
+    NSDictionary *userInfo = exception.userInfo;
+    NSString *appInfo = [userInfo objectForKey:@"AppInfo"];
+    message = [message stringByAppendingString:appInfo];
+    message = [message stringByAppendingFormat:@"%@",[userInfo objectForKey:@"CallStack"]];
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"程序出现问题啦"
-                                                        message:@"崩溃信息"
+                                                        message:message
                                                        delegate:self
                                               cancelButtonTitle:@"取消"
                                               otherButtonTitles:nil];

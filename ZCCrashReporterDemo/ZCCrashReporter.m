@@ -7,9 +7,10 @@
 //
 
 #import "ZCCrashReporter.h"
-#import "ZCSignalHandler.h"
 #import <CrashReporter/CrashReporter.h>
 #import "AppDelegate.h"
+#import "ZCSignalHandler.h"
+#import "ZCMachExceptionHandler.h"
 
 
 void UncaughtExceptionHandler(NSException *exception) {
@@ -143,7 +144,7 @@ void UncaughtExceptionHandler(NSException *exception) {
  设置Mach异常处理
  */
 - (void)setupMatchExceptionHandler {
-    
+    [ZCMachExceptionHandler registerMachExceptionHandler];
 }
 
 @end
