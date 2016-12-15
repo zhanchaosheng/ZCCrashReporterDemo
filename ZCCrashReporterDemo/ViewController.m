@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "ZCCrashReporter.h"
 
 @interface ViewController ()
 
@@ -33,5 +34,15 @@
     nullPtr[0] = 1;
 }
 
+- (IBAction)getRuntimeStackInfo:(UIButton *)sender {
+    NSString *report = [[ZCCrashReporter sharedInstance] getRuntimeStackInfo];
+    if (report.length > 0) {
+        dispatch_async(dispatch_get_global_queue(0, 0), ^{
+            NSString *filePath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+            filePath = [filePath stringByAppendingPathComponent:@"RuntimeStackInfo.crash"];
+            [report writeToFile:filePath atomically:YES encoding:NSUTF8StringEncoding error:nil];
+        });
+    }
+}
 
 @end

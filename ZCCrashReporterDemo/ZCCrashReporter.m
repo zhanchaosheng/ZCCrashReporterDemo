@@ -129,6 +129,24 @@ void UncaughtExceptionHandler(NSException *exception) {
     return [[NSBundle mainBundle] objectForInfoDictionaryKey:@"UIMainStoryboardFile"] != nil ? YES:NO;
 }
 
+- (NSString *)getRuntimeStackInfo {
+    PLCrashReporterSymbolicationStrategy strategy = PLCrashReporterSymbolicationStrategySymbolTable;
+#if TARGET_OS_SIMULATOR
+    strategy = PLCrashReporterSymbolicationStrategyAll;
+#endif
+    PLCrashReporterConfig *config = [[PLCrashReporterConfig alloc] initWithSignalHandlerType:PLCrashReporterSignalHandlerTypeBSD
+                                                                       symbolicationStrategy:strategy];
+    PLCrashReporter *crashReporter = [[PLCrashReporter alloc] initWithConfiguration:config];
+    NSData *data = [crashReporter generateLiveReport];
+    PLCrashReport *reporter = [[PLCrashReport alloc] initWithData:data error:NULL];
+    NSString *report = [PLCrashReportTextFormatter stringValueForCrashReport:reporter
+                                                              withTextFormat:PLCrashReportTextFormatiOS];
+    
+    NSLog(@"------------\n%@\n------------", report);
+    
+    return report;
+}
+
 
 #pragma mark - Unix signal
 /**

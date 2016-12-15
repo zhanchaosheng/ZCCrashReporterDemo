@@ -32,4 +32,10 @@
  使用开源异常捕获框架PLCrashReporter
  */
 - (void)setupPLCrashReporter;
+
+/**
+ 获取运行时堆栈信息
+ @return 运行时堆栈信息
+ */
+- (NSString *)getRuntimeStackInfo;
 @end
